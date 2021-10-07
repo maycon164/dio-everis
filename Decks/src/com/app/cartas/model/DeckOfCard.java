@@ -31,14 +31,24 @@ public class DeckOfCard {
 
     public void shuffle() {
         currentCard = 0;
+        //Embaralhamento imparcial de Fisher-Yates
+        int index = deck.length;
 
-        for (int first = 0; first < 51; first++) {
+        while(index != 0){
+            int aleatory = randomNumbers.nextInt(index--);
+            Card temp = deck[index];
+            deck[index] = deck[aleatory];
+            deck[aleatory] = temp;
+        }
+
+        //Embaralhamento
+        /*for (int first = 0; first < 51; first++) {
             int second = randomNumbers.nextInt(NUMBER_OF_CARDS);
 
             Card temp = deck[first];
             deck[first] = deck[second];
             deck[second] = temp;
-        }
+        }*/
     }
 
     public Card dealCard() {
