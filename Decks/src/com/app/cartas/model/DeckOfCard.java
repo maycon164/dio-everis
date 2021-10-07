@@ -20,14 +20,27 @@ public class DeckOfCard {
         deck = new Card[NUMBER_OF_CARDS];
         currentCard = 0;
 
-        for(int count = 0; count < deck.length; count++){
+        for (int count = 0; count < deck.length; count++) {
             deck[count] = new Card(faces[count % 13], suit[count / 13]);
 
         }
     }
 
-    public void showCards(){
+    public void shuffle() {
+        currentCard = 0;
+
+        for (int first = 0; first < 51; first++) {
+            int second = randomNumbers.nextInt(NUMBER_OF_CARDS);
+
+            Card temp = deck[first];
+            deck[first] = deck[second];
+            deck[second] = temp;
+        }
+    }
+
+    public void showCards() {
         Arrays.asList(deck).forEach(System.out::println);
     }
+
 
 }
