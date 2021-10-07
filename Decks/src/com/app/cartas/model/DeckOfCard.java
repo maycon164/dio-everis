@@ -1,5 +1,8 @@
 package com.app.cartas.model;
 
+import com.app.cartas.enums.Face;
+import com.app.cartas.enums.Suit;
+
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -12,16 +15,16 @@ public class DeckOfCard {
 
     public DeckOfCard() {
 
-        String[] faces = {"Ace", "Deuce", "Three", "Four", "Five", "Six",
-                "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+        Face[] faces = {Face.ACE, Face.DEUCE, Face.THREE, Face.FOUR, Face.FIVE, Face.SIX, Face.SEVEN,
+                Face.EIGHT, Face.NINE, Face.TEN, Face.JACK, Face.QUEEN, Face.KING};
 
-        String[] suit = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        Suit[] suit = {Suit.HEARTS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES};
 
         deck = new Card[NUMBER_OF_CARDS];
         currentCard = 0;
 
         for (int count = 0; count < deck.length; count++) {
-            deck[count] = new Card(faces[count % 13], suit[count / 13]);
+            deck[count] = new Card(faces[count % 13].toString(), suit[count / 13].toString());
 
         }
     }
@@ -35,6 +38,14 @@ public class DeckOfCard {
             Card temp = deck[first];
             deck[first] = deck[second];
             deck[second] = temp;
+        }
+    }
+
+    public Card dealCard() {
+        if (currentCard < deck.length) {
+            return deck[currentCard++];
+        } else {
+            return null;
         }
     }
 
